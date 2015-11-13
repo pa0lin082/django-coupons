@@ -109,6 +109,8 @@ class Coupon(models.Model):
         self.save()
         redeem_done.send(sender=self.__class__, coupon=self)
 
+    def is_valid(self):
+        return (not self.expired() and not self.redeemed_at)
 
 @python_2_unicode_compatible
 class Campaign(models.Model):
